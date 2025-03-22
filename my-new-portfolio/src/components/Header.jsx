@@ -4,6 +4,8 @@ import { RiToolsFill } from "react-icons/ri";
 import { MdWorkOutline } from "react-icons/md";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { FiPhone } from "react-icons/fi";
+import { IoHomeOutline } from "react-icons/io5";
+import Logo from "../assets/Logo.png";
 
 function Header({ isDarkMode, toggleDarkMode }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,7 +22,7 @@ function Header({ isDarkMode, toggleDarkMode }) {
     };
 
     const handleActiveSection = () => {
-      const sections = ["#about", "#skills", "#projects", "#game", "#contact"];
+      const sections = ["#home", "#about", "#skills", "#projects", "#game", "#contact"];
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -45,19 +47,25 @@ function Header({ isDarkMode, toggleDarkMode }) {
 
   return (
     <header>
-      <div className="container mx-auto px-2 py-2">
+      <div className="container">
         <div className="flex justify-between">
           <div
-            className={`mx-10 text-2xl font-bold bg-gradient-to-r from-purple-500 to-violet-300 bg-clip-text text-transparent  ${
-              isScrolled ? "opacity-1" : ""
+            className={`mx-10 w-20 h-20 rounded-full overflow-hidden border-4 border-white ${
+              isScrolled ? "opacity-5" : ""
             }`}
           >
-            Mi Portfolio
+            <img
+              src={Logo}
+              alt="brand"
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          <nav
-            className="fixed flex justify-center top-10 mx-[33%] px-6 z-50 transition-all duration-300 hidden md:flex space-x-8 bg-black/20 backdrop-blur-md rounded"
-          >
+          <nav className="fixed flex justify-center top-1.5 mx-[30%] px-6 z-50 transition-all duration-300 hidden md:flex space-x-8 bg-black/20 backdrop-blur-md rounded">
+            <NavLink href="#home" isActive={activeSection === "#home"}>
+              <IoHomeOutline className="w-8 h-8" />
+              Inicio
+            </NavLink>
             <NavLink href="#about" isActive={activeSection === "#about"}>
               <CgProfile className="w-8 h-8" />
               Sobre mí
@@ -143,6 +151,14 @@ function Header({ isDarkMode, toggleDarkMode }) {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 py-4 bg-black/40 backdrop-blur-lg rounded-lg">
             <nav className="flex flex-col space-y-4 px-4">
+            <MobileNavLink
+                href="#home"
+                onClick={() => setIsMobileMenuOpen(false)}
+                isActive={activeSection === "#home"}
+              >
+                <CgProfile className="w-8 h-8" />
+                Inicio
+              </MobileNavLink>
               <MobileNavLink
                 href="#about"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -227,19 +243,35 @@ function Header({ isDarkMode, toggleDarkMode }) {
 }
 
 const NavLink = ({ href, children, isActive }) => {
+  function handleNavClick(sectionId) {
+    // Remueve la clase 'active' de todas las secciones
+    document.querySelectorAll(".section").forEach((section) => {
+      section.classList.remove("active");
+    });
+
+    // Agrega la clase 'active' a la sección seleccionada
+    const selectedSection = document.querySelector(sectionId);
+    if (selectedSection) {
+      selectedSection.classList.add("active");
+    }
+  }
+
   return (
     <a
+      onClick={() => handleNavClick(href)}
       href={href}
       className={`flex flex-col items-center text-white font-medium relative py-2 group transition-colors duration-300 ${
         isActive ? "text-violet-400" : "hover:text-violet-400"
       }`}
     >
       {children}
-      <span
-        className={`absolute bottom-0 left-0 h-0.5 bg-violet-500 transition-all duration-300 ${
-          isActive ? "w-full" : "w-0 group-hover:w-full"
-        }`}
-      ></span>
+      {isActive && (
+        <span
+          layoutId="underline" // Identificador único para animar el subrayado
+          className="absolute bottom-0 left-0 h-0.5 bg-violet-500 w-full"
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        />
+      )}
     </a>
   );
 };

@@ -91,15 +91,15 @@ function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-16">
+    <section id="contact" className="section py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-pink-500 dark:text-pink-300">
+        <h2 className="text-4xl text-center mb-12 font-bold bg-gradient-to-r from-purple-700 to-violet-100 bg-clip-text text-transparent dark:text-purple-300">
           Contáctame
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white dark:bg-gray-900 border border-pink-200 dark:border-pink-900 rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-6 text-pink-600 dark:text-pink-300">
+          <div className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg p-6">
+            <h3 className="text-xl font-semibold mb-6 text-purple-600 dark:text-purple-300">
               Envíame un mensaje
             </h3>
 
@@ -115,7 +115,7 @@ function Contact() {
                   onChange={handleChange}
                   placeholder="Tu nombre"
                   required
-                  className="w-full px-3 py-2 border border-pink-200 dark:border-pink-900 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-800"
+                  className="w-full px-3 py-2 border border-purple-200 dark:border-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-800"
                 />
               </div>
 
@@ -131,7 +131,7 @@ function Contact() {
                   onChange={handleChange}
                   placeholder="tu@email.com"
                   required
-                  className="w-full px-3 py-2 border border-pink-200 dark:border-pink-900 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-800"
+                  className="w-full px-3 py-2 border border-purple-200 dark:border-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-800"
                 />
               </div>
 
@@ -147,14 +147,14 @@ function Contact() {
                   placeholder="Tu mensaje..."
                   rows={5}
                   required
-                  className="w-full px-3 py-2 border border-pink-200 dark:border-pink-900 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-800"
+                  className="w-full px-3 py-2 border border-purple-200 dark:border-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-800"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-md transition-colors disabled:opacity-70"
+                className="w-full px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-md transition-colors disabled:opacity-70"
               >
                 {isSubmitting ? "Enviando..." : "Enviar mensaje"}
               </button>
@@ -167,8 +167,8 @@ function Contact() {
             </form>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 border border-pink-200 dark:border-pink-900 rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-6 text-pink-600 dark:text-pink-300">
+          <div className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg p-6">
+            <h3 className="text-xl font-semibold mb-6 text-purple-600 dark:text-purple-300">
               Conéctate conmigo
             </h3>
 
@@ -184,9 +184,9 @@ function Contact() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-3 rounded-lg border border-pink-200 dark:border-pink-900 hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-colors"
+                  className="flex items-center p-3 rounded-lg border border-purple-200 dark:border-purple-900 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center text-pink-600 dark:text-pink-300 mr-3">
+                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-300 mr-3">
                     {link.icon}
                   </div>
                   <span>{link.label}</span>

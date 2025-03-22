@@ -5,7 +5,7 @@ function Skills() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-pink-500"
+          className="w-6 h-6 text-purple-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -35,7 +35,7 @@ function Skills() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-pink-500"
+          className="w-6 h-6 text-purple-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -48,14 +48,14 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["Node.js", "Express"],
+      technologies: ["Node.js", "Express", "Sequelize", "Mongoose"],
     },
     {
       category: "Bases de Datos",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-pink-500"
+          className="w-6 h-6 text-purple-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -75,7 +75,7 @@ function Skills() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-pink-500"
+          className="w-6 h-6 text-purple-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -95,7 +95,7 @@ function Skills() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-pink-500"
+          className="w-6 h-6 text-purple-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -108,14 +108,14 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["REST API", "Agile/Scrum"],
+      technologies: ["REST API", "Agile/Scrum", "Microsoft Power Platform", "Visual Studio Code", "Postman", "Azure DevOps", "Trello", "Veracode"],
     },
     {
       category: "Lenguajes de Programación",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-pink-500"
+          className="w-6 h-6 text-purple-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -133,20 +133,20 @@ function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-16 bg-pink-50 dark:bg-gray-800">
+    <section id="skills" className="section py-16 bg-purple-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-pink-500 dark:text-pink-300">
+        <h2 className="text-4xl text-center mb-12 font-bold bg-gradient-to-r from-purple-700 to-violet-100 bg-clip-text text-transparent dark:text-purple-300 dark:text-purple-300">
           Habilidades Técnicas
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-900 border border-pink-200 dark:border-pink-900 rounded-lg p-6 hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center mb-4">
                 {skill.icon}
-                <h3 className="text-xl font-semibold ml-2 text-pink-600 dark:text-pink-300">
+                <h3 className="text-xl font-semibold ml-2 text-purple-600 dark:text-purple-300">
                   {skill.category}
                 </h3>
               </div>
@@ -154,7 +154,7 @@ function Skills() {
                 {skill.technologies.map((tech, techIndex) => (
                   <span
                     key={techIndex}
-                    className="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-800 dark:text-pink-200 rounded-full text-sm"
+                    className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full text-sm"
                   >
                     {tech}
                   </span>

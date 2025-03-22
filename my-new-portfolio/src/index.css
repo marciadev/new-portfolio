@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline:opsz,wght@10..72,100..900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Vast+Shadow&family=Yatra+One&display=swap');
 @import "tailwindcss";
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    font-family: "Big Shoulders Inline", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+  }
+  body {
+    background-color: #fdfeff;
+  }
+}
 
 :root {
   --color-primary: #ec4899;
@@ -34,6 +48,140 @@ body {
 }
 
 code {
+  
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@layer components {
+
+  .about-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(217, 159, 240, 0.87);
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    gap: 15%;
+  }
+
+  .img-container {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .profile-img::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110%;
+    height: 110%;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top: 5px solid #b288d7;
+    border-right: 5px solid #b288d7;
+    border-bottom: 5px solid #b288d7;
+    box-sizing: border-box;
+    animation: spin 3s linear infinite;
+    z-index: 0;
+  }
+
+  .profile-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+    position: relative;
+    z-index: 10;
+  }
+
+  @media (min-width: 768px) {
+    .about-section {
+      justify-content: center;
+    }
+
+    h2::before {
+      width: 5%;
+    }
+
+    .about-container {
+      flex-direction: row;
+    }
+
+    .text-container {
+      width: 50%;
+    }
+  }
+  @media (min-width: 1024px) {
+    .about-container {
+      justify-content: space-around;
+    }
+
+    .profile-img {
+      width: 250px;
+      height: 250px;
+    }
+    .profile-img::before {
+      top: -10px;
+      left: -11px;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  
+  @keyframes spin {
+    from {
+      translate: rotate(0deg);
+    }
+
+    to {
+      translate: rotate(360deg);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .section {
+    opacity: 0; /* Oculta la sección inicialmente */
+    transform: translateY(50px); /* Desplaza hacia abajo inicialmente */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  
+  /* Cuando la sección está activa */
+  .section.active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideUp 0.5s ease-out;
+  }
 }
