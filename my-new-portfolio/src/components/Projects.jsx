@@ -1,85 +1,129 @@
-function Projects() {
-    const projects = [
-      {
-        title: "Flamingo App",
-        description:
-          "Flamingo es una plataforma innovadora diseñada para creadores de contenido. Ofrece herramientas para crear, gestionar y monetizar contenido digital, permitiendo a los creadores conectar directamente con su audiencia y desarrollar su marca personal.",
-        technologies: ["React", "JavaScript", "ReduxToolKit", "TailwindCSS", "Vite"],
-        videoUrl: "https://example.com/video2",
-        githubUrl: "https://github.com/marciadev/flamingo-fe",
-        liveUrl: "https://task-app.example.com",
-      },
-      {
-        title: "E-commerce Platform",
-        description:
-          "Una plataforma de comercio electrónico completa con carrito de compras, pasarela de pagos y panel de administración. Este proyecto fue realizado en forma grupal a modo de Proyecto Final para el Bootcamp de Soy Henry",
-        technologies: ["React", "Node.js", "Express", "MongoDB"],
-        videoUrl: "https://example.com/video1",
-        githubUrl: "https://github.com/marciadev/E-Commerce-G7",
-        liveUrl: "https://electroshop-ecommerce.vercel.app/",
-      },
-      {
-        title: "Notes App",
-        description:
-          "Notes App es una plataforma que permite a los usuarios crear tareas en las que trabajarán a futuro. Tienen la posibilidad de registrarse en la plataforma, iniciar sesión y acceder a todas las notas que se encuentran almacenadas según el usuario registrado, editarlas, e incluso eliminarlas. Notes App fue realizado como parte de un Desafío técnico.",
-        technologies: ["React", "Node.js", "Express", "Sequelize"],
-        videoUrl: "https://example.com/video3",
-        githubUrl: "https://github.com/marciadev/notes-app",
-        liveUrl: "https://social-dashboard.example.com",
-      },
-    ]
-  
-    return (
-      <section id="projects" className="section py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl text-center mb-12 font-bold bg-gradient-to-r from-purple-700 to-violet-100 bg-clip-text text-transparent dark:text-purple-300 dark:text-purple-300">Mis Proyectos</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                <div className="aspect-video bg-purple-100 dark:bg-gray-800 relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <button className="px-4 py-2 bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black rounded-md border border-purple-200 dark:border-purple-800 transition-colors">
-                      Ver Demo
-                    </button>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2 text-purple-600 dark:text-purple-300">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full text-xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex justify-between border-t border-purple-100 dark:border-purple-900/50 pt-4">
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../data/translations";
+import Flamingo from "../assets/flamingo-img.png"
+import ElectroShop from "../assets/e-commerce.png"
+import Notes from "../assets/notes.png"
+import Videogames from "../assets/videogames.png"
+
+const Projects = () => {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+
+  const projects = [
+    {
+      title: t.projects.items[0].title,
+      description: t.projects.items[0].description,
+      image: Flamingo,
+      technologies: [
+        "React",
+        "JavaScript",
+        "ReduxToolkit",
+        "TailwindCSS",
+        "Vite",
+      ],
+      githubUrl: "https://github.com/marciadev/flamingo-fe",
+      liveUrl: "https://www.flamingo.com.ar",
+    },
+    {
+      title: t.projects.items[1].title,
+      description: t.projects.items[1].description,
+      image: ElectroShop,
+      technologies: ["React", "Node.js", "Express", "MongoDB"],
+      githubUrl: "https://github.com/marciadev/E-Commerce-G7",
+      liveUrl: "https://electroshop-ecommerce.vercel.app/",
+    },
+    {
+      title: t.projects.items[2].title,
+      description: t.projects.items[2].description,
+      image: Notes,
+      technologies: [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "API",
+        "React",
+        "Node.js",
+        "Express",
+        "Sequelize",
+      ],
+      githubUrl: "https://github.com/marciadev/notes-app",
+    },
+    {
+      title: t.projects.items[3].title,
+      description: t.projects.items[3].description,
+      image: Videogames,
+      technologies: [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "API",
+        "React",
+        "Node.js",
+        "Express",
+        "Sequelize",
+        "Redux",
+        "Postgres"
+      ],
+      githubUrl: "https://github.com/marciadev/pi-videogames",
+    },
+  ];
+
+  return (
+    <div className="max-w-6xl mx-auto mt-10">
+      <h1 className="text-3xl font-bold mb-8 text-center text-violet-700 dark:text-violet-400">
+        {t.projects.title}
+      </h1>
+
+      <p className="text-gray-700 dark:text-gray-300 text-center mb-10 max-w-2xl mx-auto">
+        {t.projects.description}
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-8">
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-violet-100 dark:border-violet-900/30 hover:shadow-lg transition-all hover:translate-y-[-5px]"
+          >
+            <div className="relative h-48 overflow-hidden">
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                <div className="p-4">
+                  <div className="flex space-x-3">
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-3 py-1 rounded-md border border-purple-200 dark:border-purple-800 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+                      className="px-3 py-1 bg-black/70 text-white rounded-full text-sm hover:bg-black transition-colors flex items-center"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clipRule="evenodd"
+                        />
                       </svg>
-                      <span>Código</span>
+                      GitHub
                     </a>
-                    <a
+                    { project.liveUrl && (
+                      <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-3 py-1 rounded-md border border-purple-200 dark:border-purple-800 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+                      className="px-3 py-1 bg-violet-600/80 text-white rounded-full text-sm hover:bg-violet-600 transition-colors flex items-center"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
+                        className="h-4 w-4 mr-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -91,16 +135,36 @@ function Projects() {
                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                         />
                       </svg>
-                      <span>Demo</span>
-                    </a>
+                      Demo
+                    </a>)}
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+                {project.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="px-2 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-xs"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
-    )
-  }
-  
-  export default Projects  
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Projects;

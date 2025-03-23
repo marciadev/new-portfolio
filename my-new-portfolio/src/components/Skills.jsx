@@ -1,11 +1,19 @@
-function Skills() {
-  const skills = [
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../data/translations";
+
+const Skills = () => {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+
+  // Categorías de habilidades
+  const skillCategories = [
     {
-      category: "Frontend",
+      name: t.skills.categories.frontend,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-purple-500"
+          className="h-6 w-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -18,24 +26,22 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: [
+      skills: [
         "React",
         "Angular",
         "Redux Toolkit",
         "HTML5",
         "CSS3",
-        "JavaScript",
-        "TypeScript",
         "Tailwind CSS",
         "Bootstrap",
       ],
     },
     {
-      category: "Backend",
+      name: t.skills.categories.backend,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-purple-500"
+          className="h-6 w-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -48,10 +54,10 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["Node.js", "Express", "Sequelize", "Mongoose"],
+      skills: ["Node.js", "Express", "Sequelize", "Mongoose"],
     },
     {
-      category: "Bases de Datos",
+      name: t.skills.categories.database,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,10 +74,10 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["MongoDB", "PostgreSQL"],
+      skills: ["MongoDB", "PostgreSQL"],
     },
     {
-      category: "Control de Versiones",
+      name: t.skills.categories.version,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -88,10 +94,10 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["Git", "GitHub"],
+      skills: ["Git", "GitHub"],
     },
     {
-      category: "Otros",
+      name: t.skills.categories.tools,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -108,10 +114,20 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["REST API", "Agile/Scrum", "Microsoft Power Platform", "Visual Studio Code", "Postman", "Azure DevOps", "Trello", "Veracode"],
+      skills: [
+        "REST API",
+        "Docker",
+        "Agile/Scrum",
+        "Microsoft Power Platform",
+        "Visual Studio Code",
+        "Postman",
+        "Azure DevOps",
+        "Trello",
+        "Veracode",
+      ],
     },
     {
-      category: "Lenguajes de Programación",
+      name: t.skills.categories.languages,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -128,44 +144,53 @@ function Skills() {
           />
         </svg>
       ),
-      technologies: ["JavaScript", "TypeScript"],
+      skills: ["JavaScript", "TypeScript"],
     },
   ];
 
   return (
-    <section id="skills" className="section py-16 bg-purple-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-12 font-bold bg-gradient-to-r from-purple-700 to-violet-100 bg-clip-text text-transparent dark:text-purple-300 dark:text-purple-300">
-          Habilidades Técnicas
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skills.map((skill, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg p-6 hover:shadow-lg transition-shadow"
-            >
+    <div className="max-w-4xl mx-auto mt-10">
+      <h1 className="text-3xl font-bold mb-8 text-center text-violet-700 dark:text-violet-400">
+        {t.skills.title}
+      </h1>
+
+      <p className="text-gray-700 dark:text-gray-300 text-center mb-10 max-w-2xl mx-auto">
+        {t.skills.description}
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {skillCategories.map((category, index) => (
+          <div
+            key={index}
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-violet-100 dark:border-violet-900/30 hover:shadow-lg transition-shadow"
+          >
+            <div className="p-6">
               <div className="flex items-center mb-4">
-                {skill.icon}
-                <h3 className="text-xl font-semibold ml-2 text-purple-600 dark:text-purple-300">
-                  {skill.category}
+                <div className="w-10 h-10 rounded-full bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400 mr-3">
+                  {category.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+                  {category.name}
                 </h3>
               </div>
+
               <div className="flex flex-wrap gap-2">
-                {skill.technologies.map((tech, techIndex) => (
+                {category.skills.map((skill, skillIndex) => (
                   <span
-                    key={techIndex}
-                    className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full text-sm"
+                    key={skillIndex}
+                    className="px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm"
                   >
-                    {tech}
+                    {skill}
                   </span>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
+            <div className="h-2 bg-gradient-to-r from-violet-400 to-purple-500"></div>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
-}
+};
 
 export default Skills;

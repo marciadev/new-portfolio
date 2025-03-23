@@ -1,6 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
-// Directions
+// Configuración del juego
+const GRID_SIZE = 20;
+const CELL_SIZE = 20;
+const INITIAL_SPEED = 150;
+const SPEED_INCREMENT = 5;
+const WINNING_SCORE = 10;
+
+// Direcciones
 const DIRECTIONS = {
   UP: { x: 0, y: -1 },
   DOWN: { x: 0, y: 1 },
@@ -8,62 +17,104 @@ const DIRECTIONS = {
   RIGHT: { x: 1, y: 0 },
 };
 
-// Game settings
-const GRID_SIZE = 20;
-const CELL_SIZE = 20;
-const GAME_SPEED = 100;
-const WIN_SCORE = 10;
+const SnakeGame = () => {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
 
-function SnakeGame() {
   const canvasRef = useRef(null);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
-  const [showWinDialog, setShowWinDialog] = useState(false);
+  const [showWinMessage, setShowWinMessage] = useState(false);
 
-  // Game state refs to avoid dependency issues in useEffect
+  // Referencias para el estado del juego
   const snakeRef = useRef([]);
   const directionRef = useRef(DIRECTIONS.RIGHT);
   const foodRef = useRef({ x: 0, y: 0 });
-  const scoreRef = useRef(0);
+  const speedRef = useRef(INITIAL_SPEED);
   const gameLoopRef = useRef(null);
 
-  // Initialize game
+  // Inicializar el juego
   const initGame = () => {
-    // Reset state
+    // Reiniciar estado
     setGameOver(false);
     setScore(0);
-    scoreRef.current = 0;
+    setShowWinMessage(false);
+    speedRef.current = INITIAL_SPEED;
 
-    // Initialize snake in the middle
-    const initialSnake = [
+    // Inicializar serpiente
+    snakeRef.current = [
       { x: 10, y: 10 },
       { x: 9, y: 10 },
       { x: 8, y: 10 },
     ];
-    snakeRef.current = initialSnake;
 
-    // Set initial direction
+    // Establecer dirección inicial
     directionRef.current = DIRECTIONS.RIGHT;
 
-    // Place food
+    // Colocar comida
     placeFood();
 
-    // Start game loop
+    // Iniciar bucle del juego
     if (gameLoopRef.current) {
       clearInterval(gameLoopRef.current);
     }
 
-    gameLoopRef.current = setInterval(gameLoop, GAME_SPEED);
+    gameLoopRef.current = setInterval(gameLoop, speedRef.current);
     setGameStarted(true);
   };
 
-  // Place food at random position
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!gameStarted || gameOver) return;
+  
+      // Prevenir el desplazamiento de la pantalla con las flechas
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        e.preventDefault();
+      }
+  
+      // Cambiar dirección de la serpiente
+      switch (e.key) {
+        case "ArrowUp":
+          if (directionRef.current !== DIRECTIONS.DOWN) {
+            directionRef.current = DIRECTIONS.UP;
+          }
+          break;
+        case "ArrowDown":
+          if (directionRef.current !== DIRECTIONS.UP) {
+            directionRef.current = DIRECTIONS.DOWN;
+          }
+          break;
+        case "ArrowLeft":
+          if (directionRef.current !== DIRECTIONS.RIGHT) {
+            directionRef.current = DIRECTIONS.LEFT;
+          }
+          break;
+        case "ArrowRight":
+          if (directionRef.current !== DIRECTIONS.LEFT) {
+            directionRef.current = DIRECTIONS.RIGHT;
+          }
+          break;
+        default:
+          break;
+      }
+    };
+  
+    // Agregar el evento de teclado
+    window.addEventListener("keydown", handleKeyDown);
+  
+    // Limpiar el evento al desmontar
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [gameStarted, gameOver]);
+
+  // Colocar comida en posición aleatoria
   const placeFood = () => {
     const x = Math.floor(Math.random() * GRID_SIZE);
     const y = Math.floor(Math.random() * GRID_SIZE);
 
-    // Check if food is on snake
+    // Verificar si la comida está sobre la serpiente
     const isOnSnake = snakeRef.current.some(
       (segment) => segment.x === x && segment.y === y
     );
@@ -75,7 +126,7 @@ function SnakeGame() {
     }
   };
 
-  // Game loop
+  // Bucle principal del juego
   const gameLoop = () => {
     if (gameOver) return;
 
@@ -85,13 +136,13 @@ function SnakeGame() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Clear canvas
+    // Limpiar canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Move snake
+    // Mover serpiente
     moveSnake();
 
-    // Check collisions
+    // Verificar colisiones
     if (checkCollisions()) {
       setGameOver(true);
       if (gameLoopRef.current) {
@@ -100,54 +151,66 @@ function SnakeGame() {
       return;
     }
 
-    // Draw food
+    // Dibujar comida
     drawFood(ctx);
 
-    // Draw snake
+    // Dibujar serpiente
     drawSnake(ctx);
   };
 
-  // Move snake
+  // Mover la serpiente
   const moveSnake = () => {
     const head = { ...snakeRef.current[0] };
 
-    // Move head in current direction
+    // Mover cabeza en la dirección actual
     head.x += directionRef.current.x;
     head.y += directionRef.current.y;
 
-    // Check if snake eats food
+    // Verificar si la serpiente come la comida
     const ateFood =
       head.x === foodRef.current.x && head.y === foodRef.current.y;
 
     if (ateFood) {
-      // Increase score
-      scoreRef.current += 1;
-      setScore(scoreRef.current);
-
-      // Check if player won
-      if (scoreRef.current >= WIN_SCORE) {
-        setShowWinDialog(true);
-        if (gameLoopRef.current) {
-          clearInterval(gameLoopRef.current);
+      // Aumentar puntuación
+      setScore((prevScore) => {
+        const newScore = prevScore + 1;
+        if (newScore >= WINNING_SCORE) {
+          setShowWinMessage(true);
+          if (gameLoopRef.current) {
+            clearInterval(gameLoopRef.current);
+          }
         }
+        return newScore;
+      });
+
+      // Aumentar velocidad
+      speedRef.current = Math.max(
+        50,
+        INITIAL_SPEED - (score + 1) * SPEED_INCREMENT
+      );
+      if (gameLoopRef.current) {
+        clearInterval(gameLoopRef.current);
+        gameLoopRef.current = setInterval(gameLoop, speedRef.current);
       }
 
-      // Place new food
+      // Verificar victoria
+
+      // Colocar nueva comida
       placeFood();
     } else {
-      // Remove tail if didn't eat
+      // Eliminar cola si no comió
       snakeRef.current.pop();
     }
 
-    // Add new head
+    // Añadir nueva cabeza
     snakeRef.current = [head, ...snakeRef.current];
   };
 
-  // Check collisions with walls or self
+  // Verificar colisiones con paredes o con la propia serpiente
   const checkCollisions = () => {
     const head = snakeRef.current[0];
 
-    // Check wall collisions
+    // Colisiones con paredes
     if (
       head.x < 0 ||
       head.x >= GRID_SIZE ||
@@ -157,7 +220,7 @@ function SnakeGame() {
       return true;
     }
 
-    // Check self collision (skip head)
+    // Colisión con la propia serpiente (omitir cabeza)
     for (let i = 1; i < snakeRef.current.length; i++) {
       if (
         head.x === snakeRef.current[i].x &&
@@ -170,10 +233,10 @@ function SnakeGame() {
     return false;
   };
 
-  // Draw snake
+  // Dibujar serpiente
   const drawSnake = (ctx) => {
     snakeRef.current.forEach((segment, index) => {
-      ctx.fillStyle = index === 0 ? "#ec4899" : "#f9a8d4";
+      ctx.fillStyle = index === 0 ? "#8B5CF6" : "#A78BFA";
       ctx.fillRect(
         segment.x * CELL_SIZE,
         segment.y * CELL_SIZE,
@@ -181,8 +244,8 @@ function SnakeGame() {
         CELL_SIZE
       );
 
-      // Add border
-      ctx.strokeStyle = "#fdf2f8";
+      // Añadir borde
+      ctx.strokeStyle = "#F5F3FF";
       ctx.strokeRect(
         segment.x * CELL_SIZE,
         segment.y * CELL_SIZE,
@@ -192,9 +255,9 @@ function SnakeGame() {
     });
   };
 
-  // Draw food
+  // Dibujar comida
   const drawFood = (ctx) => {
-    ctx.fillStyle = "#be185d";
+    ctx.fillStyle = "#7C3AED";
     ctx.beginPath();
     ctx.arc(
       foodRef.current.x * CELL_SIZE + CELL_SIZE / 2,
@@ -206,7 +269,7 @@ function SnakeGame() {
     ctx.fill();
   };
 
-  // Handle keyboard input
+  // Manejar entrada de teclado
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!gameStarted || gameOver) return;
@@ -244,7 +307,7 @@ function SnakeGame() {
     };
   }, [gameStarted, gameOver]);
 
-  // Cleanup on unmount
+  // Limpiar al desmontar
   useEffect(() => {
     return () => {
       if (gameLoopRef.current) {
@@ -254,104 +317,98 @@ function SnakeGame() {
   }, []);
 
   return (
-    <section
-      id="game"
-      className="section py-16 dark:bg-gray-800"
-      style={{ backgroundColor: "rgba(217, 159, 240, 0.87)" }}
-    >
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-12 font-bold bg-gradient-to-r from-purple-700 to-violet-100 bg-clip-text text-transparent dark:text-purple-300 dark:text-purple-300">
-          ¡Juega Snake!
-        </h2>
-        <div className="flex flex-col items-center">
-          <div className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg p-6 mb-6">
-            <div className="mb-4 text-center">
-              <p className="text-lg font-semibold">
-                Puntuación: <span className="text-purple-500">{score}</span>
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Objetivo: {WIN_SCORE} puntos
-              </p>
-            </div>
-            <div className="border-4 border-purple-200 dark:border-purple-800 rounded-lg overflow-hidden">
-              <canvas
-                ref={canvasRef}
-                width={GRID_SIZE * CELL_SIZE}
-                height={GRID_SIZE * CELL_SIZE}
-                className="bg-purple-100 dark:bg-gray-800"
-              />
-            </div>
-          </div>
+    <div className="max-w-4xl mx-auto mt-10">
+      <h1 className="text-3xl font-bold mb-8 text-center text-violet-700 dark:text-violet-400">
+        {t.game.title}
+      </h1>
 
-          <div className="flex gap-4">
-            {!gameStarted || gameOver ? (
-              <button
-                onClick={initGame}
-                className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-md transition-colors"
-              >
-                {gameOver ? "Jugar de nuevo" : "Iniciar juego"}
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setGameStarted(false);
-                  setGameOver(true);
-                  if (gameLoopRef.current) {
-                    clearInterval(gameLoopRef.current);
-                  }
-                }}
-                className="px-4 py-2 border border-purple-500 text-purple-500 hover:bg-purple-100 dark:hover:bg-purple-900/20 rounded-md transition-colors"
-              >
-                Detener juego
-              </button>
-            )}
-          </div>
-
-          <div className="mt-6 text-center max-w-md">
-            <h3 className="text-lg font-semibold mb-2 text-purple-600 dark:text-purple-300">
-              Instrucciones:
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-2">
-              Usa las teclas de flecha para mover la serpiente. Come la comida
-              para crecer y ganar puntos. ¡Evita chocar con las paredes o
-              contigo mismo!
+      <div className="flex flex-col items-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-violet-100 dark:border-violet-900/30 mb-6">
+          <div className="mb-4 text-center">
+            <p className="text-lg font-semibold text-gray-800 dark:text-white">
+              {t.game.score}:{" "}
+              <span className="text-violet-600 dark:text-violet-400">
+                {score}
+              </span>
             </p>
-            <p className="text-gray-600 dark:text-gray-400">
-              Alcanza {WIN_SCORE} puntos para ganar el juego.
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {t.game.goal}: {WINNING_SCORE}
             </p>
           </div>
+
+          <div className="border-4 border-violet-200 dark:border-violet-800 rounded-lg overflow-hidden">
+            <canvas
+              ref={canvasRef}
+              width={GRID_SIZE * CELL_SIZE}
+              height={GRID_SIZE * CELL_SIZE}
+              className="bg-violet-50 dark:bg-gray-700"
+            />
+          </div>
+        </div>
+
+        <div className="flex gap-4">
+          {!gameStarted || gameOver ? (
+            <button
+              onClick={initGame}
+              className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition-colors"
+            >
+              {gameOver ? t.game.playAgain : t.game.startGame}
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setGameStarted(false);
+                setGameOver(true);
+                if (gameLoopRef.current) {
+                  clearInterval(gameLoopRef.current);
+                }
+              }}
+              className="px-4 py-2 border border-violet-600 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-md transition-colors"
+            >
+              {t.game.stopGame}
+            </button>
+          )}
+        </div>
+
+        <div className="mt-6 text-center max-w-md">
+          <h3 className="text-lg font-semibold mb-2 text-violet-700 dark:text-violet-400">
+            {t.game.instructions.title}
+          </h3>
+          <p className="text-gray-700 dark:text-gray-300 mb-2">
+            {t.game.instructions.controls}
+          </p>
+          <p className="text-gray-700 dark:text-gray-300">
+            {t.game.instructions.objective}
+          </p>
         </div>
       </div>
 
-      {showWinDialog && (
+      {/* Mensaje de victoria */}
+      {showWinMessage && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-900 border border-purple-200 dark:border-purple-900 rounded-lg p-6 max-w-md mx-4">
-            <h3 className="text-xl font-bold text-purple-500 dark:text-purple-300 mb-2">
-              ¡Felicidades! 🎉
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-md mx-4 border border-violet-200 dark:border-violet-800">
+            <h3 className="text-xl font-bold text-violet-700 dark:text-violet-400 mb-2">
+              {t.game.winMessage.title}
             </h3>
             <p className="mb-4 text-gray-700 dark:text-gray-300">
-              Has alcanzado {score} puntos y superado el nivel. ¡Eres increíble!
-            </p>
-            <p className="mb-6 text-gray-700 dark:text-gray-300">
-              Si disfrutaste el juego, ¡no dudes en ponerte en contacto conmigo
-              para hablar sobre proyectos o colaboraciones!
+              {t.game.winMessage.message}
             </p>
             <div className="flex justify-end">
               <button
                 onClick={() => {
-                  setShowWinDialog(false);
+                  setShowWinMessage(false);
                   setGameStarted(false);
                 }}
-                className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-md transition-colors"
+                className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition-colors"
               >
-                ¡Gracias!
+                {t.game.winMessage.button}
               </button>
             </div>
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
-}
+};
 
 export default SnakeGame;
