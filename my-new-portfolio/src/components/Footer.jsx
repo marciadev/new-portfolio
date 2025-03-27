@@ -1,19 +1,35 @@
 import { TiHeart } from "react-icons/ti";
-import { useContext } from "react"
-import { LanguageContext } from "../context/LanguageContext"
-import { translations } from "../data/translations"
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 function Footer() {
-  const { language } = useContext(LanguageContext)
-  const t = translations[language]
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+  const { theme } = useContext(ThemeContext);
   return (
-    <footer className="container absolute bg-purple-50 dark:bg-gray-900 border-t border-purple-100 dark:border-purple-900/50 mt-20 py-6">
+    <footer
+      className={`container border-t py-6 ${
+        theme === "dark"
+          ? "bg-gray-900 border-purple-900/50"
+          : "bg-purple-50 border-purple-100"
+      }`}
+    >
       <div className="mx-auto px-4 text-center">
-        <p className="flex items-center justify-center text-gray-600 dark:text-gray-400">
+        <p
+          className={`flex items-center justify-center ${
+            theme === "dark" ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
           {t.footer.footerMessage}
           <TiHeart className="w-6 h-6 text-red-500 mx-1 fill-red-500" />& React
         </p>
-        <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+        <p
+          className={`text-sm mt-2 ${
+            theme === "dark" ? "text-gray-500" : "text-gray-500"
+          }`}
+        >
           © {new Date().getFullYear()} {t.footer.copyRight}
         </p>
       </div>

@@ -84,6 +84,11 @@ export const translations = {
           "Has alcanzado la puntuación objetivo. ¡Eres increíble! Si te gustó este juego, no dudes en contactarme para hablar sobre proyectos o colaboraciones.",
         button: "¡Gracias!",
       },
+      lostMessage: {
+        title: "Fin del juego 😵‍💫",
+        message: "Has perdido. ¡Mejor suerte para la próxima!",
+        button: "Inicio",
+      },
     },
     contact: {
       title: "Contacto",
@@ -199,6 +204,11 @@ export const translations = {
           "You have reached the target score. You are amazing! If you enjoyed this game, feel free to contact me to discuss projects or collaborations.",
         button: "Thank you!",
       },
+      lostMessage: {
+        title: "Game Over 😵‍💫",
+        message: "You lost. Better luck next time!",
+        button: "Home"
+      }
     },
     contact: {
       title: "Contact",

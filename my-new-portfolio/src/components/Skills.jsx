@@ -1,12 +1,15 @@
 import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../data/translations";
+import Loader from "./Loader";
+import TechSlider from "./TechSlider";
 
 const Skills = () => {
   const { language } = useContext(LanguageContext);
   const t = translations[language];
+  const { theme } = useContext(ThemeContext);
 
-  // Categorías de habilidades
   const skillCategories = [
     {
       name: t.skills.categories.frontend,
@@ -61,7 +64,7 @@ const Skills = () => {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-purple-500"
+          className="w-6 h-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -81,7 +84,7 @@ const Skills = () => {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-purple-500"
+          className="w-6 h-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -101,7 +104,7 @@ const Skills = () => {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-purple-500"
+          className="w-6 h-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -131,7 +134,7 @@ const Skills = () => {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 text-purple-500"
+          className="w-6 h-6"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -150,26 +153,47 @@ const Skills = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-10">
-      <h1 className="text-3xl font-bold mb-8 text-center text-violet-700 dark:text-violet-400">
+      <h1
+        className={`text-3xl font-bold mb-8 text-center ${
+          theme === "dark" ? "text-violet-400" : "text-violet-700"
+        }`}
+      >
         {t.skills.title}
       </h1>
 
-      <p className="text-gray-700 dark:text-gray-300 text-center mb-10 max-w-2xl mx-auto">
+      <p
+        className={`text-center mb-10 max-w-2xl mx-auto ${
+          theme === "dark" ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
         {t.skills.description}
       </p>
-
       <div className="grid md:grid-cols-2 gap-6">
         {skillCategories.map((category, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-violet-100 dark:border-violet-900/30 hover:shadow-lg transition-shadow"
+            className={`rounded-lg shadow-md overflow-hidden border hover:shadow-lg transition-shadow ${
+              theme === "dark"
+                ? "bg-gray-800 border-violet-900/30"
+                : "bg-white border-violet-100"
+            }`}
           >
             <div className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400 mr-3">
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${
+                    theme === "dark"
+                      ? "bg-violet-900/30 text-violet-400"
+                      : "bg-violet-100 text-violet-600"
+                  }`}
+                >
                   {category.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+                <h3
+                  className={`text-xl font-semibold ${
+                    theme === "dark" ? "text-white" : "text-gray-800"
+                  }`}
+                >
                   {category.name}
                 </h3>
               </div>
@@ -178,17 +202,21 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <span
                     key={skillIndex}
-                    className="px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm"
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      theme === "dark"
+                        ? "bg-violet-900/30 text-violet-300"
+                        : "bg-violet-100 text-violet-700"
+                    }`}
                   >
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="h-2 bg-gradient-to-r from-violet-400 to-purple-500"></div>
           </div>
         ))}
       </div>
+      <TechSlider />
     </div>
   );
 };

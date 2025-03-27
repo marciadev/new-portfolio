@@ -1,14 +1,17 @@
 import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../data/translations";
-import Flamingo from "../assets/flamingo-img.png"
-import ElectroShop from "../assets/e-commerce.png"
-import Notes from "../assets/notes.png"
-import Videogames from "../assets/videogames.png"
+import Flamingo from "../assets/flamingo-img.png";
+import ElectroShop from "../assets/e-commerce.png";
+import Notes from "../assets/notes.png";
+import Videogames from "../assets/videogames.png";
+import Loader from "./Loader";
 
 const Projects = () => {
   const { language } = useContext(LanguageContext);
   const t = translations[language];
+  const { theme } = useContext(ThemeContext);
 
   const projects = [
     {
@@ -21,6 +24,10 @@ const Projects = () => {
         "ReduxToolkit",
         "TailwindCSS",
         "Vite",
+        "Java",
+        "Spring Boot",
+        "MySQL",
+        "AWS",
       ],
       githubUrl: "https://github.com/marciadev/flamingo-fe",
       liveUrl: "https://www.flamingo.com.ar",
@@ -63,7 +70,7 @@ const Projects = () => {
         "Express",
         "Sequelize",
         "Redux",
-        "Postgres"
+        "Postgres",
       ],
       githubUrl: "https://github.com/marciadev/pi-videogames",
     },
@@ -71,11 +78,19 @@ const Projects = () => {
 
   return (
     <div className="max-w-6xl mx-auto mt-10">
-      <h1 className="text-3xl font-bold mb-8 text-center text-violet-700 dark:text-violet-400">
+      <h1
+        className={`text-3xl font-bold mb-8 text-center ${
+          theme === "dark" ? "text-violet-400" : "text-violet-700"
+        }`}
+      >
         {t.projects.title}
       </h1>
 
-      <p className="text-gray-700 dark:text-gray-300 text-center mb-10 max-w-2xl mx-auto">
+      <p
+        className={`text-center mb-10 max-w-2xl mx-auto ${
+          theme === "dark" ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
         {t.projects.description}
       </p>
 
@@ -83,7 +98,11 @@ const Projects = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-violet-100 dark:border-violet-900/30 hover:shadow-lg transition-all hover:translate-y-[-5px]"
+            className={`rounded-lg shadow-md overflow-hidden border hover:shadow-lg transition-all hover:translate-y-[-5px] ${
+              theme === "dark"
+                ? "bg-gray-800 border-violet-900/30"
+                : "bg-white border-violet-100"
+            }`}
           >
             <div className="relative h-48 overflow-hidden">
               <img
@@ -91,7 +110,13 @@ const Projects = () => {
                 alt={project.title}
                 className="w-full h-full object-cover transition-transform hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+              <div
+                className={`absolute inset-0 flex items-end  hover:opacity-100 transition-opacity ${
+                  theme === "dark"
+                    ? "hover:bg-gradient-to-t from-violet-500/30 to-transparent"
+                    : "hover:bg-gradient-to-t from-violet-900/70 to-transparent"
+                }`}
+              >
                 <div className="p-4">
                   <div className="flex space-x-3">
                     <a
@@ -114,46 +139,59 @@ const Projects = () => {
                       </svg>
                       GitHub
                     </a>
-                    { project.liveUrl && (
+                    {project.liveUrl && (
                       <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1 bg-violet-600/80 text-white rounded-full text-sm hover:bg-violet-600 transition-colors flex items-center"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1 bg-violet-600/80 text-white rounded-full text-sm hover:bg-violet-600 transition-colors flex items-center"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                      Demo
-                    </a>)}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 mr-1"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                        Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+              <h3
+                className={`text-xl font-semibold mb-2 ${
+                  theme === "dark" ? "text-white" : "text-gray-800"
+                }`}
+              >
                 {project.title}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+              <p
+                className={`mb-4 ${
+                  theme === "dark" ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, techIndex) => (
                   <span
                     key={techIndex}
-                    className="px-2 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-xs"
+                    className={`px-2 py-1 rounded-full text-xs ${
+                      theme === "dark"
+                        ? "bg-violet-900/30 text-violet-300"
+                        : "bg-violet-100 text-violet-700"
+                    }`}
                   >
                     {tech}
                   </span>

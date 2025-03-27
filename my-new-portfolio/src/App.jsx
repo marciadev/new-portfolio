@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { ThemeContext } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import AboutMe from "./components/AboutMe";
@@ -6,13 +7,26 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import SnakeGame from "./components/SnakeGame";
 import Contact from "./components/Contact";
-import { ThemeProvider } from "./context/ThemeContext";
-import { LanguageProvider } from "./context/LanguageContext";
+import Transition from "./components/Transition";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const { theme } = useContext(ThemeContext);
+  const [previousPage, setPreviousPage] = useState(null);
 
-  // Renderizar el componente correspondiente según la página actual
+  // Actualizar la página anterior cuando cambia la página actual
+  useEffect(() => {
+    setPreviousPage(currentPage);
+  }, [currentPage]);
+
+  // Función para cambiar de página
+  // const changePage = (newPage) => {
+  //   if (newPage !== currentPage) {
+  //     setPreviousPage(currentPage);
+  //     setCurrentPage(newPage);
+  //   }
+  // };
+
   const renderPage = () => {
     switch (currentPage) {
       case "home":
@@ -33,16 +47,20 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-          <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto px-4 pt-20 pb-4">
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900" : "bg-white"
+      }`}
+    >
+      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <main className="container mx-auto px-4 pt-20 pb-4">
+        <Transition currentPage={currentPage} previousPage={previousPage}>
+          <div pageId={currentPage}>
             {renderPage()}
-          </main>
-        </div>
-      </LanguageProvider>
-    </ThemeProvider>
+          </div>
+        </Transition>
+      </main>
+    </div>
   );
 }
 
