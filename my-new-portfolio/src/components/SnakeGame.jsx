@@ -274,88 +274,66 @@ const SnakeGame = () => {
         {t.game.title}
       </h1>
 
-      <div className="flex flex-col items-center">
+      <div className="relative rounded-lg shadow-md p-6 mx-auto max-w-lg text-center">
+        {/* Canvas container */}
         <div
-          className={`rounded-lg shadow-md p-6 border mb-6 ${
-            theme === "dark"
-              ? "bg-gray-800 border-violet-900/30"
-              : "bg-white border-violet-100"
+          className={`rounded-lg shadow-md p-6 border canvas-adjust ${
+            theme === "dark" ? "bg-gray-800 border-violet-900/30" : "bg-white border-violet-100"
           }`}
         >
-          <div className="mb-4 text-center">
-            <p
-              className={`text-lg font-semibold ${
-                theme === "dark" ? "text-white" : "text-gray-800"
-              }`}
-            >
-              {t.game.score}:{" "}
-              <span
-                className={`${
-                  theme === "dark" ? "text-violet-400" : "text-violet-600"
-                }`}
-              >
-                {score}
-              </span>
-            </p>
-            <p
-              className={`text-sm ${
-                theme === "dark" ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              {t.game.goal}: {WINNING_SCORE}
-            </p>
-          </div>
+          {/* Canvas */}
+          <canvas
+            ref={canvasRef}
+            width={GRID_SIZE * CELL_SIZE}
+            height={GRID_SIZE * CELL_SIZE}
+            className={`${theme === "dark" ? "bg-gray-700" : "bg-violet-50"}`}
+          />
 
-          <div
-            className={`border-4 rounded-lg overflow-hidden ${
-              theme === "dark" ? "border-violet-800" : "border-violet-200"
-            }`}
-          >
-            <canvas
-              ref={canvasRef}
-              width={GRID_SIZE * CELL_SIZE}
-              height={GRID_SIZE * CELL_SIZE}
-              className={`${theme === "dark" ? "bg-gray-700" : "bg-violet-50"}`}
-            />
-          </div>
-        </div>
-
-        <div className="flex gap-4">
+          {/* Instructions overlay */}
           {!gameStarted && (
-            <button
-              onClick={initGame}
-              className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition-colors"
-            >
-              {gameOver ? t.game.playAgain : t.game.startGame}
-            </button>
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-semibold mb-2">
+                {t.game.instructions.title}
+              </h3>
+              <p className="mb-2">{t.game.instructions.controls}</p>
+              <p className="mb-4">{t.game.instructions.objective}</p>
+              <button
+                onClick={initGame}
+                className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition-colors"
+              >
+                {gameOver ? t.game.playAgain : t.game.startGame}
+              </button>
+            </div>
           )}
         </div>
 
-        <div className="mt-6 text-center max-w-md">
-          <h3
-            className={`text-lg font-semibold mb-2 ${
-              theme === "dark" ? "text-violet-400" : "text-violet-700"
-            }`}
-          >
-            {t.game.instructions.title}
-          </h3>
+        {/* Score and goal */}
+        <div className="mt-4 text-center">
           <p
-            className={`mb-2 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            className={`text-lg font-semibold ${
+              theme === "dark" ? "text-white" : "text-gray-800"
             }`}
           >
-            {t.game.instructions.controls}
+            {t.game.score}:{" "}
+            <span
+              className={`${
+                theme === "dark" ? "text-violet-400" : "text-violet-600"
+              }`}
+            >
+              {score}
+            </span>
           </p>
           <p
-            className={`mb-2 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            className={`text-sm ${
+              theme === "dark" ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            {t.game.instructions.objective}
+            {t.game.goal}: {WINNING_SCORE}
           </p>
         </div>
       </div>
 
+      {/* Win message */}
       {showWinMessage && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div
@@ -394,6 +372,7 @@ const SnakeGame = () => {
         </div>
       )}
 
+      {/* Lost message */}
       {lost && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div

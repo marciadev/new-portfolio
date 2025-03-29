@@ -33,13 +33,15 @@ const Transition = ({ children, currentPage, previousPage }) => {
       
       {isTransitioning && previousDisplayedPage && (
         <div className="page-transition page-exit">
-          {React.Children.toArray(children).find((child) => child.props.pageId === previousDisplayedPage)}
+          {children.find((child) => child.key === previousDisplayedPage)}
+          {/* {React.Children.toArray(children).find((child) => child.props.pageId === previousDisplayedPage)} */}
         </div>
       )}
 
       
       <div className={`page-transition ${isTransitioning ? "page-enter" : ""}`}>
-        {React.Children.toArray(children).find((child) => child.props.pageId === displayedPage)}
+      {children.find((child) => child.key === displayedPage)}
+        {/* {React.Children.toArray(children).find((child) => child.props.pageId === displayedPage)} */}
       </div>
     </div>
   )

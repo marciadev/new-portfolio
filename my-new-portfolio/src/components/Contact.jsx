@@ -27,15 +27,32 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(false);
+    const formData = new FormData(e.target);
+
+    formData.append("access_key", "e7db81ac-2836-4a96-afb0-af8a937fa84c");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    }).then((res) => res.json());
     setIsSubmitting(true);
     setSubmitError(false);
 
     setTimeout(() => {
       setIsSubmitting(false);
 
-      if (Math.random() > 0.1) {
+      if (res.success) {
         setSubmitSuccess(true);
         setFormData({
           name: "",

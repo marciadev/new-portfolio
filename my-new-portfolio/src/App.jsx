@@ -14,37 +14,9 @@ function App() {
   const { theme } = useContext(ThemeContext);
   const [previousPage, setPreviousPage] = useState(null);
 
-  // Actualizar la página anterior cuando cambia la página actual
   useEffect(() => {
     setPreviousPage(currentPage);
   }, [currentPage]);
-
-  // Función para cambiar de página
-  // const changePage = (newPage) => {
-  //   if (newPage !== currentPage) {
-  //     setPreviousPage(currentPage);
-  //     setCurrentPage(newPage);
-  //   }
-  // };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case "home":
-        return <Home />;
-      case "about":
-        return <AboutMe />;
-      case "skills":
-        return <Skills />;
-      case "projects":
-        return <Projects />;
-      case "game":
-        return <SnakeGame />;
-      case "contact":
-        return <Contact />;
-      default:
-        return <Home />;
-    }
-  };
 
   return (
     <div
@@ -55,8 +27,23 @@ function App() {
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <main className="container mx-auto px-4 pt-20 pb-4">
         <Transition currentPage={currentPage} previousPage={previousPage}>
-          <div pageId={currentPage}>
-            {renderPage()}
+          <div key="home">
+            <Home />
+          </div>
+          <div key="about">
+            <AboutMe />
+          </div>
+          <div key="skills">
+            <Skills />
+          </div>
+          <div key="projects">
+            <Projects />
+          </div>
+          <div key="game">
+            <SnakeGame />
+          </div>
+          <div key="contact">
+            <Contact />
           </div>
         </Transition>
       </main>

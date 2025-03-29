@@ -267,9 +267,9 @@ const TechSlider = () => {
   }, [isPaused, technologies.length]);
 
   return (
-    <div className="max-w-4xl mx-auto my-10">
+    <div className="max-w-4xl mx-auto my-6">
       <div
-        className={`relative rounded-lg shadow-md p-25 border overflow-hidden ${
+        className={`relative rounded-lg shadow-md p-20 border overflow-hidden ${
           theme === "dark"
             ? "bg-gray-800 border-violet-900/30"
             : "bg-white border-violet-100"
@@ -278,7 +278,7 @@ const TechSlider = () => {
         onMouseLeave={() => setIsPaused(false)}
       >
         <div className="flex justify-center">
-          <div className="relative w-full max-w-2xl">
+          <div className="relative w-auto max-w-lg bottom-10">
             {technologies.map((tech, index) => (
               <div
                 key={index}

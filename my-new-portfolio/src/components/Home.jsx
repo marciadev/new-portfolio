@@ -24,7 +24,7 @@ const Home = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] p-4">
+        <div className="relative w-full min-h-[calc(121vh-6rem)] overflow-hidden">
           <div
             className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url(${bgImg})` }}
@@ -36,7 +36,7 @@ const Home = () => {
                   : "bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"
               }`}
             ></div>
-            <div className="relative z-10 flex flex-col items-center justify-center text-center">
+            <div className="relative z-10 flex flex-col items-center justify-center text-center my-10">
               <div className="about-container mx-20">
                 <div className="img-container">
                   <div className="profile-img">

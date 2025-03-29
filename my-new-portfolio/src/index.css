@@ -347,8 +347,11 @@ html {
     }
   }
   
-  /* Asegurarse de que la página actual esté visible inicialmente */
   .page-transition:not(.page-enter):not(.page-exit) {
     transform: translateX(0);
+  }
+
+  .canvas-adjust {
+    justify-self: anchor-center;
   }
 }

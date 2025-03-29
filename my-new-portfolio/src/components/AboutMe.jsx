@@ -78,6 +78,33 @@ const AboutMe = () => {
           </div>
         </div>
       </div>
+      <div
+        className={`max-w-4xl mx-auto my-6 p-6 rounded-lg ${
+          theme === "dark" ? "bg-violet-900/20" : "bg-violet-50"
+        }`}
+      >
+        <h3
+          className={`text-xl font-semibold mb-3 ${
+            theme === "dark" ? "text-violet-400" : "text-violet-700"
+          }`}
+        >
+          {t.about.interestsTitle}
+        </h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          {t.about.interests.map((interest, index) => (
+            <span
+              key={index}
+              className={`px-5 py-5 rounded-full text-sm ${
+                theme === "dark"
+                  ? "bg-violet-800/40 text-violet-300"
+                  : "bg-violet-100 text-violet-700"
+              }`}
+            >
+              {interest}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

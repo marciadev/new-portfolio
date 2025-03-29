@@ -22,7 +22,16 @@ export const translations = {
       role: "Desarrolladora Frontend",
       bioTitle: "Biografía",
       bio: "Soy desarrolladora Frontend y profesora de Inglés con más de 2 años de experiencia en el sector IT.  Mi experiencia abarca desde el desarrollo frontend con React y Angular, hasta el backend con Node.js y Express. Me encanta resolver problemas complejos y crear experiencias de usuario intuitivas y atractivas. Soy una apasionada por la programación, me encanta la naturaleza, los animales, en especial los gatos. Soy proactiva, comprometida, autodidacta y me gusta aprender nuevas tecnologías. ¡Siempre estoy buscando nuevos desafíos y oportunidades para crecer profesionalmente!",
-      btnDownload: "Descargar CV"
+      btnDownload: "Descargar CV",
+      interestsTitle: "Intereses Profesionales",
+      interests: [
+        "Resolución de errores: Disfruto identificando y resolviendo problemas para garantizar un rendimiento fluido.",
+        "Resolución de problemas: Me encanta abordar desafíos complejos de codificación.",
+        "Aprendizaje continuo: Siempre busco ampliar mis conocimientos y habilidades.",
+        "Tecnología: Me encanta explorar nuevas tendencias e innovaciones en el desarrollo web.",
+        "Optimización del rendimiento: Siempre busco formas de hacer que las aplicaciones sean más rápidas y eficientes.",
+        "Programación: Disfruto creando aplicaciones escalables y resolviendo problemas complejos."
+      ],
     },
     skills: {
       title: "Mis Habilidades",
@@ -142,10 +151,19 @@ export const translations = {
       role: "Frontend Developer",
       bioTitle: "Biography",
       bio: "I am a Frontend Developer and English teacher with over 2 years of experience in the IT sector. My expertise ranges from frontend development with React and Angular to backend development with Node.js and Express. I love solving complex problems and creating intuitive and engaging user experiences. I am passionate about programming, enjoy nature, love animals, especially cats. I am proactive, committed, self-taught, and enthusiastic about learning new technologies. I am always seeking new challenges and opportunities for professional growth!",
-      btnDownload: "Download CV"
+      btnDownload: "Download CV",
+      interestsTitle: "Professional Interests",
+      interests: [
+        "Bug Fixing: Enjoy identifying and resolving issues to ensure smooth performance.",
+        "Problem-Solving: Enjoy tackling complex coding challenges.",
+        "Continuous Learning: Always looking to expand my knowledge and skills.",
+        "Technology: Love exploring new web development trends and innovations.",
+        "Performance Optimization: Always looking for ways to make applications faster and more efficient.",
+        "Coding: Love building scalable applications and solving complex problems."
+      ],
     },
     skills: {
-      title: "My Skills",
+      title: "My Skill Set",
       description:
         "I have worked with various technologies and tools throughout my career. Here is a summary of my technical skills.",
       categories: {
