@@ -5,7 +5,7 @@ import { translations } from "../data/translations";
 import Me from "../assets/casual.jpg";
 import bgImg from "../assets/bg-img-3.jpg";
 import Loader from "./Loader";
-import Footer from "./Footer";
+import { TiHeart } from "react-icons/ti";
 
 const Home = () => {
   const { language } = useContext(LanguageContext);
@@ -20,13 +20,13 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {loading ? (
         <Loader />
       ) : (
-        <div className="relative w-full min-h-[calc(121vh-6rem)] overflow-hidden">
+        <div className="flex flex-col items-center justify-center flex-1 p-4">
           <div
-            className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${bgImg})` }}
           >
             <div
@@ -64,7 +64,7 @@ const Home = () => {
                 {t.home.title}
               </h2>
               <p
-                className={`text-lg max-w-lg mx-auto mb-8 ${
+                className={`text-lg max-w-lg mx-auto mb-2 ${
                   theme === "dark" ? "text-gray-300" : "text-gray-600"
                 }`}
               >
@@ -76,7 +76,7 @@ const Home = () => {
                   href="https://github.com/marciadev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`transition-colors ${
+                  className={`transition-colors transition-transform duration-300 hover:scale-120 ${
                     theme === "dark"
                       ? "text-gray-300 hover:text-violet-500"
                       : "text-gray-700 hover:text-violet-600"
@@ -100,7 +100,7 @@ const Home = () => {
                   href="https://www.linkedin.com/in/marciadev/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`transition-colors ${
+                  className={`transition-colors transition-transform duration-300 hover:scale-120 ${
                     theme === "dark"
                       ? "text-gray-300 hover:text-violet-500"
                       : "text-gray-700 hover:text-violet-600"
@@ -117,11 +117,38 @@ const Home = () => {
                   </svg>
                 </a>
               </div>
+              <div className="relative z-10 flex flex-col items-center justify-center text-center my-6">
+                <footer
+                  className={`w-full py-6 ${
+                    theme === "dark"
+                      ? "bg-gray-900 border-purple-900/50"
+                      : "border-purple-100"
+                  }`}
+                >
+                  <div className="mx-auto px-4 text-center">
+                    <p
+                      className={`flex items-center justify-center ${
+                        theme === "dark" ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
+                      {t.footer.footerMessage}
+                      <TiHeart className="w-6 h-6 text-red-500 mx-1 fill-red-500" />
+                      & React
+                    </p>
+                    <p
+                      className={`text-sm mt-2 ${
+                        theme === "dark" ? "text-gray-500" : "text-gray-500"
+                      }`}
+                    >
+                      © {new Date().getFullYear()} {t.footer.copyRight}
+                    </p>
+                  </div>
+                </footer>
+              </div>
             </div>
           </div>
         </div>
       )}
-      {loading ? "" : <Footer />}
     </div>
   );
 };

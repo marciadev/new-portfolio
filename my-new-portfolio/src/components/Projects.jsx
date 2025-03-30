@@ -6,7 +6,6 @@ import Flamingo from "../assets/flamingo-img.png";
 import ElectroShop from "../assets/e-commerce.png";
 import Notes from "../assets/notes.png";
 import Videogames from "../assets/videogames.png";
-import Loader from "./Loader";
 
 const Projects = () => {
   const { language } = useContext(LanguageContext);

@@ -39,14 +39,14 @@ html {
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: #8b5cf6;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #7c3aed;
-}
+} */
 
 @layer components {
   .about-container {

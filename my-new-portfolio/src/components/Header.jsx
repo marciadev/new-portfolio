@@ -137,7 +137,7 @@ const NavItem = ({ children, isActive, onClick, theme }) => {
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-2 rounded-md font-medium transition-colors ${
+      className={`px-3 py-2 rounded-md font-medium transition-colors transition-transform duration-300 hover:scale-90 ${
         isActive
           ? `${ theme === 'dark' ? 'bg-violet-900/40 text-violet-300' : 'bg-violet-100 text-violet-700'}`
           : `${ theme === 'dark' ? 'text-gray-300 hover:bg-violet-900/20 hover:text-violet-300' : 'text-gray-700 hover:bg-violet-50 hover:text-violet-700'}`

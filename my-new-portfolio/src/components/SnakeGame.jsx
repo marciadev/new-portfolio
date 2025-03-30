@@ -275,13 +275,11 @@ const SnakeGame = () => {
       </h1>
 
       <div className="relative rounded-lg shadow-md p-6 mx-auto max-w-lg text-center">
-        {/* Canvas container */}
         <div
           className={`rounded-lg shadow-md p-6 border canvas-adjust ${
             theme === "dark" ? "bg-gray-800 border-violet-900/30" : "bg-white border-violet-100"
           }`}
         >
-          {/* Canvas */}
           <canvas
             ref={canvasRef}
             width={GRID_SIZE * CELL_SIZE}
@@ -289,7 +287,6 @@ const SnakeGame = () => {
             className={`${theme === "dark" ? "bg-gray-700" : "bg-violet-50"}`}
           />
 
-          {/* Instructions overlay */}
           {!gameStarted && (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold mb-2">
@@ -307,7 +304,6 @@ const SnakeGame = () => {
           )}
         </div>
 
-        {/* Score and goal */}
         <div className="mt-4 text-center">
           <p
             className={`text-lg font-semibold ${
@@ -333,7 +329,6 @@ const SnakeGame = () => {
         </div>
       </div>
 
-      {/* Win message */}
       {showWinMessage && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div
@@ -372,7 +367,6 @@ const SnakeGame = () => {
         </div>
       )}
 
-      {/* Lost message */}
       {lost && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div

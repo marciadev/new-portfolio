@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../data/translations";
-import Loader from "./Loader";
 import TechSlider from "./TechSlider";
 
 const Skills = () => {
