@@ -28,12 +28,25 @@ const SnakeGame = () => {
   const [score, setScore] = useState(0);
   const [showWinMessage, setShowWinMessage] = useState(false);
   const [lost, setLost] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const snakeRef = useRef([]);
   const directionRef = useRef(DIRECTIONS.RIGHT);
   const foodRef = useRef({ x: 0, y: 0 });
   const speedRef = useRef(INITIAL_SPEED);
   const gameLoopRef = useRef(null);
+
+  const detectMobileDevice = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|iemobile/i.test(
+      userAgent
+    );
+  };
+
+  useEffect(() => {
+    // Detecta si el usuario está en un dispositivo móvil al cargar el componente
+    setIsMobile(detectMobileDevice());
+  }, []);
 
   const initGame = () => {
     setGameOver(false);
@@ -277,7 +290,9 @@ const SnakeGame = () => {
       <div className="relative rounded-lg shadow-md p-6 mx-auto max-w-lg text-center">
         <div
           className={`rounded-lg shadow-md p-6 border canvas-adjust ${
-            theme === "dark" ? "bg-gray-800 border-violet-900/30" : "bg-white border-violet-100"
+            theme === "dark"
+              ? "bg-gray-800 border-violet-900/30"
+              : "bg-white border-violet-100"
           }`}
         >
           <canvas
@@ -287,20 +302,29 @@ const SnakeGame = () => {
             className={`${theme === "dark" ? "bg-gray-700" : "bg-violet-50"}`}
           />
 
-          {!gameStarted && (
+          {isMobile ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white rounded-lg shadow-md p-6">
               <h3 className="text-lg font-semibold mb-2">
-                {t.game.instructions.title}
+                {t.game.mobileMessage.title}
               </h3>
-              <p className="mb-2">{t.game.instructions.controls}</p>
-              <p className="mb-4">{t.game.instructions.objective}</p>
-              <button
-                onClick={initGame}
-                className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition-colors"
-              >
-                {gameOver ? t.game.playAgain : t.game.startGame}
-              </button>
+              <p className="mb-4">{t.game.mobileMessage.message}</p>
             </div>
+          ) : (
+            !gameStarted && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white rounded-lg shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-2">
+                  {t.game.instructions.title}
+                </h3>
+                <p className="mb-2">{t.game.instructions.controls}</p>
+                <p className="mb-4">{t.game.instructions.objective}</p>
+                <button
+                  onClick={initGame}
+                  className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md transition-colors"
+                >
+                  {gameOver ? t.game.playAgain : t.game.startGame}
+                </button>
+              </div>
+            )
           )}
         </div>
 

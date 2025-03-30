@@ -117,7 +117,7 @@ const Home = () => {
                   </svg>
                 </a>
               </div>
-              <div className="relative z-10 flex flex-col items-center justify-center text-center my-6">
+              <div className="relative w-full z-10 flex flex-col items-center justify-center text-center my-6">
                 <footer
                   className={`w-full py-6 ${
                     theme === "dark"

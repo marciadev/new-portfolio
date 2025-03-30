@@ -30,7 +30,7 @@ export const translations = {
         "Aprendizaje continuo: Siempre busco ampliar mis conocimientos y habilidades.",
         "Tecnología: Me encanta explorar nuevas tendencias e innovaciones en el desarrollo web.",
         "Optimización del rendimiento: Siempre busco formas de hacer que las aplicaciones sean más rápidas y eficientes.",
-        "Programación: Disfruto creando aplicaciones escalables y resolviendo problemas complejos."
+        "Programación: Disfruto creando aplicaciones escalables y resolviendo problemas complejos.",
       ],
     },
     skills: {
@@ -86,6 +86,10 @@ export const translations = {
           "Usa las teclas de flecha para mover la serpiente. Come la comida para crecer y ganar puntos.",
         objective:
           "Alcanza 10 puntos para ganar el juego. ¡Evita chocar con las paredes o contigo mismo!",
+      },
+      mobileMessage: {
+        title: "Juego no disponible",
+        message: "Ingrese desde la web para acceder al juego.",
       },
       winMessage: {
         title: "¡Felicidades! 🎉",
@@ -159,7 +163,7 @@ export const translations = {
         "Continuous Learning: Always looking to expand my knowledge and skills.",
         "Technology: Love exploring new web development trends and innovations.",
         "Performance Optimization: Always looking for ways to make applications faster and more efficient.",
-        "Coding: Love building scalable applications and solving complex problems."
+        "Coding: Love building scalable applications and solving complex problems.",
       ],
     },
     skills: {
@@ -216,6 +220,10 @@ export const translations = {
         objective:
           "Reach 10 points to win the game. Avoid hitting the walls or yourself!",
       },
+      mobileMessage: {
+        title: "Game not available",
+        message: "Please access the game via the website.",
+      },
       winMessage: {
         title: "Congratulations! 🎉",
         message:
@@ -225,8 +233,8 @@ export const translations = {
       lostMessage: {
         title: "Game Over 😵‍💫",
         message: "You lost. Better luck next time!",
-        button: "Home"
-      }
+        button: "Home",
+      },
     },
     contact: {
       title: "Contact",
