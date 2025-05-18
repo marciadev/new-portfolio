@@ -354,4 +354,10 @@ html {
   .canvas-adjust {
     justify-self: anchor-center;
   }
+
+  .footer{
+    display: grid;
+    min-height: 17dvh;
+    grid-template-rows: auto 1fr auto;
+  }
 }
