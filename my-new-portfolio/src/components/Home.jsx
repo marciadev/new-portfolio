@@ -6,6 +6,7 @@ import Me from "../assets/casual.jpg";
 import bgImg from "../assets/bg-img-3.jpg";
 import Loader from "./Loader";
 import { TiHeart } from "react-icons/ti";
+import Footer from "./Footer";
 
 const Home = () => {
   const { language } = useContext(LanguageContext);
@@ -20,14 +21,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen relative">
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex flex-col items-center justify-center flex-1 p-4">
+        <>
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center -z-10"
             style={{ backgroundImage: `url(${bgImg})` }}
+            aria-hidden="true"
           >
             <div
               className={`absolute top-0 left-0 w-full h-full ${
@@ -36,7 +38,10 @@ const Home = () => {
                   : "bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"
               }`}
             ></div>
-            <div className="relative z-10 flex flex-col items-center justify-center text-center my-10">
+          </div>
+          
+          <div className="flex flex-col items-center justify-center flex-1 p-4">
+            <div className="relative z-10 flex flex-col items-center justify-center text-center my-10 w-full">
               <div className="about-container mx-20">
                 <div className="img-container">
                   <div className="profile-img">
@@ -71,7 +76,7 @@ const Home = () => {
                 {t.home.description}
               </p>
 
-              <div className="flex justify-center space-x-6">
+              <div className="flex justify-center space-x-6 mb-5">
                 <a
                   href="https://github.com/marciadev"
                   target="_blank"
@@ -117,37 +122,10 @@ const Home = () => {
                   </svg>
                 </a>
               </div>
-              <div className="footer relative w-full z-10 flex flex-col items-center justify-center text-center my-6">
-                <footer
-                  className={`w-full py-6 ${
-                    theme === "dark"
-                      ? "bg-gray-900 border-purple-900/50"
-                      : "border-purple-100"
-                  }`}
-                >
-                  <div className="mx-auto px-4 text-center">
-                    <p
-                      className={`flex items-center justify-center ${
-                        theme === "dark" ? "text-gray-400" : "text-gray-600"
-                      }`}
-                    >
-                      {t.footer.footerMessage}
-                      <TiHeart className="w-6 h-6 text-red-500 mx-1 fill-red-500" />
-                      & React
-                    </p>
-                    <p
-                      className={`text-sm mt-2 ${
-                        theme === "dark" ? "text-gray-500" : "text-gray-500"
-                      }`}
-                    >
-                      © {new Date().getFullYear()} {t.footer.copyRight}
-                    </p>
-                  </div>
-                </footer>
-              </div>
             </div>
           </div>
-        </div>
+          <Footer />
+        </>
       )}
     </div>
   );

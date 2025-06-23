@@ -278,7 +278,7 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10">
+    <div className="max-w-4xl mx-auto mt-10 relative min-h-screen">
       <h1
         className={`text-3xl font-bold mb-8 text-center ${
           theme === "dark" ? "text-violet-400" : "text-violet-700"
@@ -392,7 +392,15 @@ const SnakeGame = () => {
       )}
 
       {lost && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{
+            background: theme === "dark"
+              ? "rgba(17, 24, 39, 0.95)"
+              : "rgba(0, 0, 0, 0.7)",
+            minHeight: "100vh",
+            minWidth: "100vw",
+          }}
+        >
           <div
             className={`rounded-lg shadow-lg p-6 max-w-md mx-4 border ${
               theme === "dark"

@@ -30,12 +30,17 @@ const Skills = () => {
       ),
       skills: [
         "React",
+        "Next.js",
         "Angular",
+        "React Native",
+        "Expo",
+        "Redux",
         "Redux Toolkit",
         "HTML5",
         "CSS3",
         "Tailwind CSS",
         "Bootstrap",
+        "Shadcn"
       ],
     },
     {
@@ -56,7 +61,7 @@ const Skills = () => {
           />
         </svg>
       ),
-      skills: ["Node.js", "Express", "Sequelize", "Mongoose"],
+      skills: ["Node.js", "Express", "Sequelize", "Mongoose", "Prisma"],
     },
     {
       name: t.skills.categories.database,

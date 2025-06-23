@@ -4,8 +4,8 @@ import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 import Flamingo from "../assets/flamingo-img.png";
 import ElectroShop from "../assets/e-commerce.png";
-import Notes from "../assets/notes.png";
-import Videogames from "../assets/videogames.png";
+import Vibes from "../assets/vibesphere.png";
+import Garage from "../assets/garage.png";
 
 const Projects = () => {
   const { language } = useContext(LanguageContext);
@@ -42,36 +42,32 @@ const Projects = () => {
     {
       title: t.projects.items[2].title,
       description: t.projects.items[2].description,
-      image: Notes,
+      image: Vibes,
       technologies: [
-        "JavaScript",
-        "HTML",
-        "CSS",
-        "API",
-        "React",
-        "Node.js",
-        "Express",
-        "Sequelize",
+        "TypeScript",
+        "Next.js",
+        "Tailwind",
+        "Shadcn",
+        "Clerk",
+        "Prisma",
+        "Postgres",
       ],
-      githubUrl: "https://github.com/marciadev/notes-app",
+      githubUrl: "https://github.com/marciadev/social-media",
+      liveUrl: "https://social-media-opal-nu.vercel.app/",
     },
     {
       title: t.projects.items[3].title,
       description: t.projects.items[3].description,
-      image: Videogames,
+      image: Garage,
       technologies: [
-        "JavaScript",
-        "HTML",
-        "CSS",
-        "API",
-        "React",
-        "Node.js",
-        "Express",
-        "Sequelize",
-        "Redux",
-        "Postgres",
+        "TypeScript",
+        "Next.js",
+        "Tailwind",
+        "Shadcn UI",
+        "Web3forms"
       ],
-      githubUrl: "https://github.com/marciadev/pi-videogames",
+      githubUrl: "https://github.com/marciadev/garage-website",
+      liveUrl: "https://garage-website-gamma.vercel.app/",
     },
   ];
 

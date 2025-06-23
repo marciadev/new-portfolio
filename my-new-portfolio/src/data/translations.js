@@ -59,17 +59,17 @@ export const translations = {
         {
           title: "ElectroShop",
           description:
-            "ElectroShop es una plataforma de comercio electrónico completa con carrito de compras, pasarela de pagos y panel de administración. Este proyecto fue realizado en forma grupal a modo de Proyecto Final para el Bootcamp de Soy Henry.",
+            "ElectroShop es una plataforma de comercio electrónico completa con carrito de compras, pasarela de pagos y panel de administración. Este proyecto fue realizado en forma grupal a modo de Proyecto Final para el Bootcamp Henry.",
         },
         {
-          title: "Notes App",
+          title: "VibeSphere",
           description:
-            "Notes App es una plataforma que permite a los usuarios crear tareas en las que trabajarán a futuro. Tienen la posibilidad de registrarse en la plataforma, iniciar sesión y acceder a todas las notas que se encuentran almacenadas según el usuario registrado, editarlas, e incluso eliminarlas. Notes App fue realizado como parte de un Desafío técnico.",
+            "VibeSphere es una red social dinámica que permite a los usuarios iniciar sesión de forma rápida y segura con sus cuentas de gmail a través de Clerk. En esta plataforma, los usuarios pueden compartir momentos especiales, seguir a otras personas, dar likes, comentar publicaciones y subir fotos. Además, cuentan con la posibilidad de editar sus perfiles y eliminar los posts que hayan creado, brindando mayor control sobre su experiencia dentro de la comunidad.",
         },
         {
-          title: "Videogames Cave",
+          title: "Taller de Chapa y Pintura",
           description:
-            "Videogames Cave es un buscador de videojuegos, el cual fue desarrollado como proyecto individual durante un bootcamp Soy Henry, destacando mi habilidad para integrar APIs externas en aplicaciones web. La plataforma permite a los usuarios explorar información detallada sobre diversos videojuegos, ofreciendo una experiencia intuitiva y dinámica.",
+            "Este proyecto es una página web profesional para un taller de chapa y pintura, desarrollada con Next.js. Está diseñada para ofrecer información clara y útil a los clientes, mejorar la presencia online del taller y facilitar el contacto directo a través de un formulario funcional.",
         },
       ],
     },
@@ -192,17 +192,17 @@ export const translations = {
         {
           title: "ElectroShop",
           description:
-            "ElectroShop is a comprehensive e-commerce platform featuring a shopping cart, payment gateway, and admin panel. This project was developed collaboratively as the Final Project for the Soy Henry Bootcamp.",
+            "ElectroShop is a comprehensive e-commerce platform featuring a shopping cart, payment gateway, and admin panel. This project was developed collaboratively as the Final Project for Henry's Bootcamp.",
         },
         {
-          title: "Notes App",
+          title: "VibeSphere",
           description:
-            "Notes App is a platform that allows users to create tasks they will work on in the future. Users can register on the platform, log in, and access all notes stored under their registered account. They can edit the notes or even delete them. Notes App was developed as part of a Technical Challenge.",
+            "VibeSphere is a dynamic social network that allows users to log in quickly and securely using their gmail accounts through Clerk. On this platform, users can share special moments, follow others, like and comment on posts, and upload photos. They also have the ability to edit their profiles and delete their own posts, giving them greater control over their experience within the community.",
         },
         {
-          title: "Videogames Cave",
+          title: "Garage Website",
           description:
-            "Videogames Cave is a video game search engine developed as an individual project during the Soy Henry bootcamp, highlighting my ability to integrate external APIs into web applications. The platform allows users to explore detailed information about various video games, offering an intuitive and dynamic experience.",
+            "This project is a professional website, developed with Next.js. It is designed to provide clear and useful information to clients, enhance the shop's online presence, and make direct contact easier through a functional contact form.",
         },
       ],
     },
@@ -222,7 +222,7 @@ export const translations = {
       },
       mobileMessage: {
         title: "Game not available",
-        message: "Please access the game via the website.",
+        message: "Please access from the website to play.",
       },
       winMessage: {
         title: "Congratulations! 🎉",
