@@ -29,7 +29,7 @@ const Projects = () => {
         "AWS",
       ],
       githubUrl: "https://github.com/marciadev/flamingo-fe",
-      liveUrl: "https://www.flamingo.com.ar",
+      //liveUrl: "https://www.flamingo.com.ar",
     },
     {
       title: t.projects.items[1].title,
