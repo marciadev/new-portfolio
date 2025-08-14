@@ -3,8 +3,8 @@ import { ThemeContext } from "../context/ThemeContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 import Me from "../assets/Me.jpeg";
-import EnglishCV from "../assets/Marcia-English.pdf";
-import SpanishCV from "../assets/Marcia-Espanol.pdf";
+import EnglishCV from "../assets/Marcia-Leite-CV-English.pdf";
+import SpanishCV from "../assets/Marcia-Leite-CV-Spanish.pdf";
 
 const AboutMe = () => {
   const { language } = useContext(LanguageContext);
