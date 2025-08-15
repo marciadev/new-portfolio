@@ -5,7 +5,6 @@ import { translations } from "../data/translations";
 import Me from "../assets/casual.jpg";
 import bgImg from "../assets/bg-img-3.jpg";
 import Loader from "./Loader";
-import { TiHeart } from "react-icons/ti";
 import Footer from "./Footer";
 
 const Home = () => {

@@ -145,7 +145,7 @@ export const translations = {
       greeting: "Hi, I'm Marcia!",
       title: "Frontend Developer",
       description:
-        "I specialize in creating modern and responsive web applications using the latest technologies. I combine my experience as an English teacher with my passion for web development to build digital solutions.",
+        "I specialize in creating modern and responsive web applications using the latest technologies. I combine my experience as an English Language Teacher with my passion for web development to build digital solutions.",
       profileAlt: "Profile photo",
     },
     about: {
@@ -154,7 +154,7 @@ export const translations = {
       name: "Marcia Leite",
       role: "Frontend Developer",
       bioTitle: "Biography",
-      bio: "I am a Frontend Developer and English teacher with over 2 years of experience in the IT sector. My expertise ranges from frontend development with React and Angular to backend development with Node.js and Express. I love solving complex problems and creating intuitive and engaging user experiences. I am passionate about programming, enjoy nature, love animals, especially cats. I am proactive, committed, self-taught, and enthusiastic about learning new technologies. I am always seeking new challenges and opportunities for professional growth!",
+      bio: "I am a Frontend Developer and English Language Teacher with over 2 years of experience in the IT sector. My expertise ranges from frontend development with React and Angular to backend development with Node.js and Express. I love solving complex problems and creating intuitive and engaging user experiences. I am passionate about programming, enjoy nature, love animals, especially cats. I am proactive, committed, self-taught, and enthusiastic about learning new technologies. I am always seeking new challenges and opportunities for professional growth!",
       btnDownload: "Download CV",
       interestsTitle: "Professional Interests",
       interests: [

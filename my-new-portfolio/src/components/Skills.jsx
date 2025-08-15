@@ -61,7 +61,7 @@ const Skills = () => {
           />
         </svg>
       ),
-      skills: ["Node.js", "Express", "Sequelize", "Mongoose", "Prisma"],
+      skills: ["Node.js", "Express", "Sequelize", "Mongoose", "Prisma", "Drizzle"],
     },
     {
       name: t.skills.categories.database,
