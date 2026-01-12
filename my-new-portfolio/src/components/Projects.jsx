@@ -28,8 +28,8 @@ const Projects = () => {
         "MySQL",
         "AWS",
       ],
-      githubUrl: "https://github.com/marciadev/flamingo-fe",
-      //liveUrl: "https://www.flamingo.com.ar",
+      //githubUrl: "https://github.com/marciadev/flamingo-fe",
+      liveUrl: "https://www.flamingo.com.ar",
     },
     {
       title: t.projects.items[1].title,
@@ -67,7 +67,7 @@ const Projects = () => {
         "Web3forms"
       ],
       githubUrl: "https://github.com/marciadev/garage-website",
-      liveUrl: "https://garage-website-gamma.vercel.app/",
+      liveUrl: "https://taller-leite.vercel.app/",
     },
   ];
 
