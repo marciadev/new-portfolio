@@ -122,6 +122,10 @@ const Skills = () => {
         </svg>
       ),
       skills: [
+        "n8n",
+        "Webhooks",
+        "Gemini",
+        "Copilot",
         "REST API",
         "Docker",
         "Agile/Scrum",
